@@ -1,0 +1,77 @@
+{% extends 'project/layout.html' %}
+
+{% block body %}
+    {% load static %}
+    <div class="login-container center-horizontal  center-vertical container" style="width: 15%; max-width: 15%">
+        <h1 style="margin-bottom: 10px; text-align: center">Signup</h1>
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="DemonSlayer96">
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password">
+        </div>
+        <div class="mb-3">
+            <label for="vpassword" class="form-label">Verify Password</label>
+            <input type="password" class="form-control" id="vpassword">
+        </div>
+
+        <button id="signup" class="btn btn-primary" style="width: 100%; margin-bottom: 15px">Signup</button>
+    </div>
+
+    <script>
+        const button = document.getElementById("signup");
+        button.onclick = () => {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const vpassword = document.getElementById("vpassword").value;
+
+            // check if they are not the same
+            if (password !== vpassword) {
+                showError("Password and password verify should be the same");
+                return;
+            }
+
+            // send post request in background
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "", true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.setRequestHeader('X-CSRFToken', "{{ csrf_token }}");
+            xhr.send(JSON.stringify({
+                username: username,
+                password: password,
+                vpassword: vpassword
+            }));
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    const status = xhr.status;
+                    // if post request is good, redirect to index
+                    if (status === 200)
+                        window.location.href = "{% url 'index' %}";
+                    else if ((status !== 0 || !(status >= 200 && status < 400))) {
+                        const errorMsg = JSON.parse(xhr.response).error;
+                        showError(errorMsg);
+                    }
+                }
+            }
+
+        };
+
+        function showError(errorMsg) {
+            let messageDiv = document.getElementById("errorDiv");
+            // if the messageDiv does not exist, create it
+            if (messageDiv === null) {
+                messageDiv = document.createElement("div");
+                messageDiv.setAttribute("id", "errorDiv");
+            }
+
+            messageDiv.classList.add("alert", "alert-danger");
+            messageDiv.style.textAlign = "center";
+            messageDiv.innerText = errorMsg;
+            document.body.appendChild(messageDiv);
+        }
+    </script>
+
+{% endblock %}
