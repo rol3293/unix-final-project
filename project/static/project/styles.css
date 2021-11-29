@@ -1,0 +1,33 @@
+.login-container {
+    /*margin-top: 5%;*/
+    /*margin-bottom: 5%;*/
+    border: 1px solid #ccc !important;
+    border-radius: 12px;
+}
+
+.center-vertical {
+    margin: 0;
+    position: absolute;
+    top: 20%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.center-horizontal {
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.under {
+    border: 1px solid #ccc !important;
+    border-radius: 12px;
+
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
