@@ -11,7 +11,7 @@ from django.shortcuts import render, reverse
 def index(request):
     users = User.objects.all()
     return render(request, "project/index.html", {
-        "user": request.user,
+        "current_user": request.user,
         "users": users
     })
 

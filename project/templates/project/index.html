@@ -4,11 +4,11 @@
 
 {% load static %}
 
-<h1>Welcome {{ user.username }}!</h1>
+<h1>Welcome {{ current_user.username }}!</h1>
 
 <ul class="list-group">
     {% for user in users %}
-        <li class="list-group-item">user.username</li>
+        <li class="list-group-item">{{ user.username }}</li>
     {% endfor %}
 </ul>
 
