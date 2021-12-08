@@ -2,10 +2,17 @@
 
 {% block body %}
 
-    {% load static %}
+{% load static %}
 
-    <h1>Welcome {{ user.username }}!</h1>
-    <a href="{% url 'login' %}">Login</a>
-    <a href="{% url 'logout' %}">Logout</a>
+<h1>Welcome {{ user.username }}!</h1>
+
+<ul class="list-group">
+    {% for user in users %}
+        <li class="list-group-item">user.username</li>
+    {% endfor %}
+</ul>
+
+
+<a href="{% url 'logout' %}">Logout</a>
 
 {% endblock body %}

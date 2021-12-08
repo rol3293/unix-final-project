@@ -9,8 +9,10 @@ from django.shortcuts import render, reverse
 
 @login_required
 def index(request):
+    users = User.objects.all()
     return render(request, "project/index.html", {
-        "user": request.user
+        "user": request.user,
+        "users": users
     })
 
 
