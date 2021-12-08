@@ -15,12 +15,15 @@
         </div>
 
         <button id="login" class="btn btn-primary" style="width: 100%; margin-bottom: 15px">Login</button>
+        
+        <div style="border-top: black solid 1px; margin-bottom: 5px;">
+            Don't have an account? 
+        <a href="{% url 'signup' %}">Create an account</a>
     </div>
 
-    <div class="container under center-horizontal" style="width: 15%; max-width: 15%;">
-        Don't have an account? <a href="{% url 'signup' %}">Create an account</a>
     </div>
 
+    
     <script>
         let showedError = false;
         const button = document.getElementById("login");
@@ -44,7 +47,7 @@
                     if (status === 200)
                         window.location.href = "{% url 'index' %}";
                     else if ((status !== 0 || !(status >= 200 && status < 400))  && !showedError) {
-                        showError(xhr.response.error);
+                        showError(JSON.parse(xhr.response).error);
                     }
                 }
             }
