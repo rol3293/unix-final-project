@@ -4,11 +4,18 @@
 
 {% load static %}
 
+<script src="{% static 'project/js/index.js' %}"></script>
+
 <h1>Welcome {{ current_user.username }}!</h1>
 
-<ul class="list-group">
+<ul class="list-group" style="width: 40%;">
     {% for user in users %}
-        <li class="list-group-item">{{ user.username }}</li>
+        <li class="list-group-item" style="min-height: 55px;" id="user{{ user.id }}">
+            {{ user.username }}
+            {% if current_user.username == "root" and user.username != "root" %}
+                <button class="btn btn-danger" style="float: inline-end;" onclick="remove({{ user.id }}, '{{ csrf_token }}')">Delete</button>
+            {% endif %}
+        </li>
     {% endfor %}
 </ul>
 

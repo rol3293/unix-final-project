@@ -3,7 +3,7 @@ import json
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.http import JsonResponse, HttpResponseRedirect, request
 from django.shortcuts import render, reverse
 
 
@@ -68,3 +68,21 @@ def signup(request):
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("login"))
+
+def delete(request):
+    if request.user.username != "root":
+        return JsonResponse({
+            "error": "You do not have the rights to delete users"
+        }, status=401)
+    if request.method == "POST":
+        # parse json
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        id = body["id"]
+
+        # delete user from table
+        User.objects.filter(id=id).delete()
+
+        return JsonResponse({
+            "success": "successfully removed user"
+        }, status=200)
