@@ -12,17 +12,13 @@ Step 1: "ssh root@143.110.221.245"
 
 ## Setup
 
-Step 1: Password = Unix4Life!
+Step 1: Write the password
 
-Step 2: Enter command "ls"
+Step 2: cd into unix-final-project
 
-Step 3: cd into unix-final-project
+Step 3: Enter command "python3 manage.py runserver 0.0.0.0:8000"
 
-Step 4: Enter command "ls"
-
-Step 5: Enter command "python3 manage.py runserver 0.0.0.0:8000"
-
-Step 6: In your browser, enter "143.110.221.245:8000/project/"
+Step 4: In your browser, enter "143.110.221.245:8000/project/"
 
 ## Contribution
 
